@@ -138,6 +138,4 @@ except Exception as e:
     st.error(f"Error: {e}")
     st.info("Please check the dataset connectivity.")
 
-st.sidebar.divider()
-st.sidebar.info("Developed with ❤️ using Streamlit & Scikit-Learn")
 
