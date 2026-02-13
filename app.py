@@ -119,9 +119,7 @@ try:
     res_col1, res_col2 = st.columns([1, 2])
     
     with res_col1:
-        st.markdown('<div class="metric-container">', unsafe_allow_html=True)
         st.metric("Predicted Quality Score", f"{prediction:.2f}")
-        st.markdown('</div>', unsafe_allow_html=True)
         
     with res_col2:
         # Visual feedback based on score
