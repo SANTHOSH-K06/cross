@@ -109,28 +109,32 @@ try:
 
     st.divider()
     
-    # Prediction logic
-    input_df = pd.DataFrame([inputs])
-    prediction = model.predict(input_df)[0]
-    
-    # Premium Result Display
-    st.subheader("🎯 Prediction Result")
-    
-    res_col1, res_col2 = st.columns([1, 2])
-    
-    with res_col1:
-        st.metric("Predicted Quality Score", f"{prediction:.2f}")
+    # Prediction logic trigger
+    if st.button("🚀 Predict Quality", use_container_width=True):
+        input_df = pd.DataFrame([inputs])
+        prediction = model.predict(input_df)[0]
         
-    with res_col2:
-        # Visual feedback based on score
-        if prediction >= 7:
-            st.success("✨ **Premium Quality!** This wine shows exceptional characteristics.")
-        elif prediction >= 5:
-            st.info("👍 **Standard Quality.** This is a well-balanced wine.")
-        else:
-            st.warning("⚠️ **Lower Quality.** The chemical profile suggests some inconsistencies.")
+        # Premium Result Display
+        st.subheader("🎯 Prediction Result")
+        
+        res_col1, res_col2 = st.columns([1, 2])
+        
+        with res_col1:
+            st.metric("Predicted Quality Score", f"{prediction:.2f}")
             
-        st.progress(min(max(prediction / 10, 0.0), 1.0))
+        with res_col2:
+            # Visual feedback based on score
+            if prediction >= 7:
+                st.success("✨ **Premium Quality!** This wine shows exceptional characteristics.")
+            elif prediction >= 5:
+                st.info("👍 **Standard Quality.** This is a well-balanced wine.")
+            else:
+                st.warning("⚠️ **Lower Quality.** The chemical profile suggests some inconsistencies.")
+                
+            st.progress(min(max(prediction / 10, 0.0), 1.0))
+    else:
+        st.info("💡 Adjust the parameters on the sidebar and click the button to see the prediction result.")
+
 
 except Exception as e:
     st.error(f"Error: {e}")
